@@ -1,0 +1,62 @@
+<table th:fragment="examination-detail" class="result_table">
+  <th:block>
+    <table
+      th:replace="fragments/result-table-head-links:: result-table-head-links"
+    ></table>
+  </th:block>
+  <thead>
+    <tr>
+      <th>Kayıt</th>
+      <th>İsim</th>
+      <th>Soyisim</th>
+      <th>Giriş Tarihi</th>
+      <th>Şikayet</th>
+      <th>Telefon Numarası</th>
+      <th>Sahiplik</th>
+      <th>İşlem</th>
+    </tr>
+  </thead>
+  <tbody th:each=" record , i : ${patientRecord}">
+    <tr>
+      <th th:text="${i.index+1}"></th>
+      <td th:text="${record.owner.firstName}"></td>
+      <td th:text="${record.owner.lastName}"></td>
+      <td th:text="${record.entry_date}"></td>
+      <td th:text="${record.complaint}">şikayet</td>
+      <td th:text="${record.owner.phoneNumber}"></td>
+      <td th:text="${record.patient.name}"></td>
+      <td class="container_action_table">
+        <a
+          th:href="@{/owner/examination/edit(id=${record.id},status='ON')}"
+          th:if="${#httpServletRequest.requestURI  == '/owner'}"
+          class="process-button button-on"
+          >Muayeneye Al</a
+        >
+        <a
+          th:href="@{/owner/examination/edit(id=${record.id},status='COMPLETED')}"
+          th:if="${#request.getParameter('status') == 'ON'}"
+          th:unless="${#request.getParameter('status') == null}"
+          class="process-button button-on"
+          >Muayeneyi Tamamla</a
+        >
+        <a
+          th:href="@{/owner/examination/edit(id=${record.id},status='RELEASE')}"
+          th:if="${#request.getParameter('status') == 'COMPLETED'}"
+          th:unless="${#request.getParameter('status') == null}"
+          class="process-button button-completed"
+          >Çıkış Yap</a
+        >
+        <a
+          th:href="@{owner/examination/details(id=${record.id})} "
+          class="process-button button-detail"
+          >İncele</a
+        >
+        <a
+          th:href="@{owner/delete/{id}(id=${record.owner.ownerId})}"
+          class="process-button button-delete"
+          >Sil</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>

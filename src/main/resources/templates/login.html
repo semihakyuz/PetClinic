@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/css/login.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container-login">
+      <div class="wrapper-login">
+        <div class="login-header">
+          <h2>*Sisteme sadece klinik görevlileri girebilir.</h2>
+          <span>Kullanıcı Girişi</span>
+          <span th:if="${param.error}" class="login-header error"
+            >*Kullanıcı adı veya parola hatalı."</span
+          >
+        </div>
+        <form action="" method="POST" class="login-form">
+          <div class="login-input">
+            <label for="username">*Kullanıcı Adı</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Kullanıcı Adı"
+            />
+            <label for="parola">*Parola</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Parola"
+            />
+          </div>
+          <button type="submit" class="login-button">Giriş Yap</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

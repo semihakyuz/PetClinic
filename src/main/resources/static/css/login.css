@@ -1,0 +1,378 @@
+.container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(209, 203, 197, 0.726);
+  width: 100%;
+  height: 100vh;
+}
+
+.wrapper-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: rgba(184, 175, 164, 0.726);
+  box-shadow: 0 0 5px 5px rgb(221 212 202 / 73%);
+  width: 20%;
+}
+
+@media (min-width: 1200px) {
+  .wrapper-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: rgba(184, 175, 164, 0.726);
+    box-shadow: 0 0 5px 5px rgb(221 212 202 / 73%);
+    width: 350px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .wrapper-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: rgba(184, 175, 164, 0.726);
+    box-shadow: 0 0 5px 5px rgb(221 212 202 / 73%);
+    width: 250px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .wrapper-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: rgba(184, 175, 164, 0.726);
+    box-shadow: 0 0 5px 5px rgb(221 212 202 / 73%);
+    width: 250px;
+  }
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+.login-header span {
+  margin-bottom: 5px;
+}
+.login-header h2 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+@media (min-width: 1200px) {
+  .login-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .login-header span {
+    font-size: 1.5em;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .login-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .login-header span {
+    font-size: 1.4em;
+  }
+}
+@media (max-width: 991.98px) {
+  .login-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+    font-weight: bold;
+  }
+  .login-header span {
+    font-size: 1.4em;
+  }
+}
+
+.login-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.login-input input {
+  display: flex;
+  width: 250px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: bold;
+  outline: none;
+  border: none;
+}
+.login-input label {
+  margin-bottom: 3px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.login-button {
+  width: 150px;
+  height: 40px;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  .login-button {
+    width: 110px;
+    height: 40px;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .login-button {
+    width: 80px;
+    height: 40px;
+    margin-bottom: 30px;
+    font-size: 0.8em;
+  }
+}
+@media (max-width: 991.98px) {
+  .login-button {
+    width: 80px;
+    height: 40px;
+    margin-bottom: 30px;
+    font-size: 0.8em;
+  }
+}
+
+.login-button:hover {
+  border: 1px solid grey;
+  background-color: rgb(212, 206, 200);
+}
+
+.container-tracking form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+@media (min-width: 1200px) {
+  .login-input input {
+    width: 150px;
+    height: 30px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .login-input input {
+    width: 150px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .login-input input {
+    width: 150px;
+    height: 30px;
+  }
+}
+
+.tracking-input {
+  width: 100%;
+  height: 25px;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.tracking-submit-button {
+  width: 50px;
+  height: 38px;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  .container-tracking {
+    margin-top: 100px;
+  }
+
+  .container-tracking form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 250px;
+  }
+
+  .tracking-input {
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+  }
+
+  .tracking-input::placeholder {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+
+  .tracking-submit-button {
+    width: 50px;
+    height: 38px;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .container-tracking {
+    margin-top: 100px;
+  }
+
+  .container-tracking form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 180px;
+  }
+
+  .tracking-input {
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+  }
+
+  .tracking-input::placeholder {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+
+  .tracking-submit-button {
+    width: 50px;
+    height: 27px;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .container-tracking {
+    margin-top: 100px;
+  }
+
+  .container-tracking form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 180px;
+  }
+
+  .tracking-input {
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+  }
+
+  .tracking-input::placeholder {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+
+  .tracking-submit-button {
+    width: 50px;
+    height: 27px;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+}
+.login-header.error {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: rgb(233, 70, 70);
+}
+
+.login-header.error-tracking {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: rgb(233, 70, 70);
+}
+
+@media (min-width: 1200px) {
+  .login-header.error {
+    font-size: 1em;
+  }
+
+  .login-header.error.error-tracking {
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .login-header.error {
+    font-size: 1em;
+  }
+
+  .login-header.error.error-tracking {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .login-header.error {
+    font-size: 1em;
+  }
+
+  .login-header.error.error-tracking {
+    font-size: 1em;
+  }
+}

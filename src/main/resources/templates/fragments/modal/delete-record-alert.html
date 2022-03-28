@@ -1,0 +1,45 @@
+<div th:fragment="delete-record-alert" class="container-delete-record-alert">
+  <div class="wrapper-delete-rocord-alert">
+    <form method="POST">
+      <h3
+        th:unless="${#httpServletRequest.requestURI  == '/owner' || #httpServletRequest.requestURI  == '/pets' || #httpServletRequest.requestURI  == '/user'}"
+      >
+        Bu işlem hasta kaydını kalıcı olarak siler.
+      </h3>
+      <h3 th:if="${#httpServletRequest.requestURI  == '/owner'}">
+        Bu işlem hayvan sahibini, hayvanlarını ve tüm muayene geçmişini kalıcı
+        olarak siler.
+      </h3>
+      <h3 th:if="${#httpServletRequest.requestURI  == '/pets'}">
+        Bu işlem hayvan kaydını ve tüm muayene geçmişini kalıcı olarak siler.
+      </h3>
+      <h3 th:if="${#httpServletRequest.requestURI  == '/user'}">
+        Bu işlem kullanıcı kaydını kalıcı olarak siler.
+      </h3>
+      <div class="delete-record-alert_buttons">
+        <button type="submit" class="delete-submit">Onayla</button>
+        <button type="button" class="delete-cancel">Vazgeç</button>
+      </div>
+      <input
+        type="text"
+        name="recordId"
+        style="visibility: hidden; position: absolute"
+        value=""
+      />
+      <input
+        th:if="${#httpServletRequest.requestURI  == '/owner'}"
+        type="text"
+        name="ownerId"
+        style="visibility: hidden; position: absolute"
+        value=""
+      />
+      <input
+        type="text"
+        name="param"
+        class="param"
+        style="visibility: hidden; position: absolute"
+        value=""
+      />
+    </form>
+  </div>
+</div>

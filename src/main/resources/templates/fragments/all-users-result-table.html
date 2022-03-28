@@ -1,0 +1,46 @@
+<table th:fragment="all-users-result-table" class="result_table">
+  <th:block>
+    <table
+      th:replace="fragments/result-table-head-links:: result-table-head-links(parameter=${'user'}) "
+    ></table>
+  </th:block>
+  <thead >
+    <tr>
+      <th style="text-align: center;" >Kayıt</th>
+      <th style="text-align: center;"  >Kullanıcı Adı</th>
+      <th sec:authorize="hasRole('ROLE_ADMIN')">İşlem</th>
+    </tr>
+  </thead>
+  <tbody th:each=" user , i : ${allUsers}">
+    <tr>
+      <th th:text="${i.index+1}"></th>
+      <td style="text-align: center;"  th:text="${user.username}"></td>
+      <td sec:authorize="hasRole('ROLE_ADMIN')" class="container_action_table">
+        <div class="wrapper_action-table">
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            th:href="@{/user/update(userId=${user.userId}) }"
+            class="process-button button-detail"
+            >Düzenle</a
+          >
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            class="process-button button-delete all-users"
+          >
+            Sil
+          </a>
+          <span
+            th:text="${user.userId}"
+            class="recordId"
+            style="visibility: hidden; position: absolute"
+          ></span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+  <th:block th:if="${foundedUserMessage == null}">
+    <div
+      th:replace="fragments/pagination :: pagination(parameter=${'user'})"
+    ></div>
+  </th:block>
+</table>

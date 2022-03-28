@@ -1,0 +1,99 @@
+<table th:fragment="record-result-table" class="result_table record">
+  <th:block>
+    <table
+      th:replace="fragments/result-table-head-links:: result-table-head-links"
+    ></table>
+  </th:block>
+  <thead>
+    <tr>
+      <th>Kayıt</th>
+      <th class="result-animal-name">İsim</th>
+      <th>Tür</th>
+      <th>Cins</th>
+      <th>Yaş</th>
+      <th>Şikayet</th>
+      <th class="result-record-entrydate">Giriş Tarihi</th>
+      <th
+        th:if="${#httpServletRequest.requestURI  != '/' && #request.getParameter('status') != 'ON' && #request.getParameter('status') != 'COMPLETED'}"
+      >
+        Çıkış Tarihi
+      </th>
+      <th
+        th:if="${#httpServletRequest.requestURI  != '/' && #request.getParameter('status') != 'ON' }"
+      >
+        Hekim Yorumu
+      </th>
+      <th>Sahiplik Bilgisi</th>
+      <th>İşlem</th>
+    </tr>
+  </thead>
+  <tbody th:each=" record , i : ${records}">
+    <tr>
+      <th th:text="${i.index+1}"></th>
+      <td th:text="${record.patient.name}"></td>
+      <th th:text="${record.patient.breed}"></th>
+      <th th:text="${record.patient.type}"></th>
+      <th th:text="${record.patient.age}"></th>
+      <td th:text="${record.complaint}"></td>
+      <td th:text="${record.entryDate}"></td>
+      <td
+        th:if="${#httpServletRequest.requestURI  != '/' && #request.getParameter('status') != 'ON' && #request.getParameter('status') != 'COMPLETED'}"
+        th:text="${record.releaseDate}"
+      ></td>
+      <td
+        th:if="${#httpServletRequest.requestURI  != '/' && #request.getParameter('status') != 'ON' }"
+        th:text="${record.review}"
+        class="vet-review"
+      ></td>
+      <td>
+        <a
+          th:href="@{/owner/details(id=${record.patient.owner.ownerId}) }"
+          th:text="${record.patient.owner.firstName} +' '+ ${record.patient.owner.lastName}"
+          class="ownership-list-column-info"
+        ></a>
+      </td>
+      <td class="container_action_table">
+        <div class="wrapper_action-table">
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            th:href="@{/examination/edit(id=${record.id},status='ON')}"
+            th:if="${#httpServletRequest.requestURI  == '/'}"
+            class="process-button button-on"
+            >Muayeneye Al</a
+          >
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            th:if="${#request.getParameter('status') == 'ON'}"
+            class="process-button button-completed review"
+            >Muayeneyi Tamamla</a
+          >
+          <div
+            th:replace="fragments/modal/patientservice/review-modal :: review-modal "
+          ></div>
+          <a
+            th:href="@{/examination/edit(id=${record.id},status='RELEASE')}"
+            th:if="${#request.getParameter('status') == 'COMPLETED'}"
+            class="process-button button-completed"
+            >Çıkış Yap</a
+          >
+          <a
+            th:href="@{pets/details(id=${record.patient.animalId})}"
+            class="process-button button-detail"
+            >İncele</a
+          >
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            class="process-button button-delete"
+          >
+            Sil
+          </a>
+          <span
+            th:text="${record.id}"
+            class="recordId"
+            style="visibility: hidden; position: absolute"
+          ></span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,64 @@
+<div
+  th:fragment="user-update-form-fields"
+  class="container-review user-registration user-update modal_active"
+>
+  <div
+    class="wrapper_review-content user-registration owner-update user-update"
+  >
+    <form th:action="@{/user/update}" method="POST" th:object="${userInfo}">
+      <div class="wrapper-modal user-registration">
+        <h2 class="fields-header owner-update user-update">
+          Kullanıcı Bilgilerini Düzenle
+        </h2>
+        <h2
+          class="fields-header user-header-info"
+          th:text="${'&quot; '+userInfo.username +' &quot;'}"
+        ></h2>
+        <div
+          th:if="${userFieldsUpdateErrors !=null} "
+          class="user-registration-error"
+        >
+          <span th:each=" msg , i : ${userFieldsUpdateErrors}">
+            <span th:text="${msg} "></span>
+          </span>
+        </div>
+        <div
+          class="wrapper-modal_fields user-registration user-update"
+          style="width: 400px"
+        >
+          <input
+            type="text"
+            id="userId"
+            name="userId"
+            style="visibility: hidden; position: absolute"
+            th:value="${userInfo.userId}"
+          />
+          <div>
+            <label for="username">*Kullanıcı Adı</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              th:value="${userUpdateErrorsUserObject !=null} ? ${userUpdateErrorsUserObject.username} : ${userInfo.username} "
+            />
+          </div>
+        </div>
+      </div>
+      <div class="user-update-password-link">
+        <span>Parolayı değiştirmek için</span>
+        <a th:href="@{/user/update/updatepassword(userId =${userInfo.userId})}">
+          tıklayınız
+        </a>
+      </div>
+      <button
+        type=" submit"
+        class="modal-from-submit user-registration owner-update user-update"
+      >
+        Kaydet
+      </button>
+    </form>
+    <div class="modal-closed-button animal-update">
+      <a href="/user"><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+</div>

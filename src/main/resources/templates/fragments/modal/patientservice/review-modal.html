@@ -1,0 +1,16 @@
+<div th:fragment="review-modal" class="container-review">
+  <div class="wrapper_review-content review-text">
+    <h2 class="review-content_header">Hekim Yorumu</h2>
+    <form
+      th:action="@{/examination/edit(id=${record.id},status='COMPLETED')}"
+      method="POST"
+    >
+      <span class="review-content_info">*Boş bırakılabilir.</span>
+      <textarea name="review" id="review"></textarea>
+      <button type="submit" class="review_submit-button">Onayla</button>
+    </form>
+    <div class="modal-closed-button review">
+      <a><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+</div>

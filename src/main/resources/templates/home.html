@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
+    <title>Document</title>
+    <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/css/app.css" rel="stylesheet" type="text/css" />
+    <script src="/fontawesome/solid.js" type="text/javascript"></script>
+    <script src="/fontawesome/fontawesome.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-profile">
+            <ul class="profile-menu">
+                <li><a th:href="@{/user/update}">Bilgilerimi Güncelle</a></li>
+                <li><a href="/user/update/updatepassword">Parola Değiştir</a></li>
+                <li><a href="/logout">Çıkış Yap</a></li>
+            </ul>
+        </div>
+        <div class="wrapper">
+            <div class="container_sticker">
+                <div class="owners">
+                    <a href="/">
+                        <div class="owners_icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </a>
+                    <h4 class="text_info">Hasta Kayıt</h4>
+                    <a class="icon_add_pets">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
+                </div>
+                <div  class="users">
+                    <a href="/user">
+                        <div class="users_icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </a>
+                    <h4 class="text_info">Üyeler</h4>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="icon_add_user">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="result">
+        <th:block th:if="${records !=null}">
+            <table th:replace="fragments/record-result-table :: record-result-table"></table>
+        </th:block>
+        <th:block th:if="${allOwners !=null}">
+            <table th:replace="fragments/all-owners-result-table :: all-owners-result-table"></table>
+        </th:block>
+        <th:block th:if="${allAnimals !=null}">
+            <table th:replace="fragments/all-animals-result-table :: all-animals-result-table"></table>
+        </th:block>
+        <th:block  th:if="${allUsers !=null}">
+            <table th:replace="fragments/all-users-result-table :: all-users-result-table"></table>
+        </th:block>
+        <th:block th:if="${animalDetailUpdate !=null}">
+            <table
+                th:replace="fragments/modal/animal/animal-update :: animal-update(animalDetail=${animalDetailUpdate},foundedOwners=${listOwners} ) ">
+            </table>
+        </th:block>
+        <th:block th:if="${ownerDetailUpdate !=null}">
+            <table
+                th:replace="fragments/modal/owner/owner-update :: owner-update(ownerDetail=${ownerDetailUpdate},foundedAnimals=${listAnimals} ) ">
+            </table>
+        </th:block>
+    </div>
+    <th:block>
+        <div th:replace="fragments/modal/patientservice/patient-record :: patient-record "></div>
+    </th:block>
+    <th:block th:if="${animalDetail !=null}">
+        <div th:replace="fragments/modal/animal/animal-details :: animal-details(animal=${animalDetail}) "></div>
+    </th:block>
+    <th:block th:if="${ownerDetail !=null}">
+        <div th:replace="fragments/modal/owner/owner-details :: owner-details(owner=${ownerDetail}) ">
+        </div>
+    </th:block>
+        <th:block th:if="${#httpServletRequest.requestURI  == '/user/update/updatepassword'}">
+        <div th:replace="fragments/modal/user/user-update-password-form-fields::user-update-password-form-fields"></div> 
+    </th:block>
+    <th:block th:if="${#httpServletRequest.requestURI  == '/user/update'}">
+        <div th:replace="fragments/modal/user/user-update-form-fields::user-update-form-fields"></div>
+    </th:block>
+    <th:block>
+        <div th:replace="fragments/modal/user/user-fields-form :: user-fields-form "></div>
+    </th:block>
+    <div th:replace="fragments/modal/delete-record-alert :: delete-record-alert"></div>
+    </div>
+
+
+    <script
+        th:if="${#httpServletRequest.requestURI  != '/pets/update' && #httpServletRequest.requestURI  != '/owner/update'}"
+        src="/js/main.js" type="text/javascript"></script>
+    <script th:if="${#httpServletRequest.requestURI  == '/pets/update'}" th:inline="javascript"
+        th:src="@{/js/animal.js}" type="text/javascript">
+        </script>
+    <script th:if="${#httpServletRequest.requestURI  == '/owner/update'}" th:inline="javascript"
+        th:src="@{/js/owner.js}" type="text/javascript">
+        </script>
+
+</body>
+
+</html>

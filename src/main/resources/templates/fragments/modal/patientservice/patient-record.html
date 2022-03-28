@@ -1,0 +1,55 @@
+<div
+  th:fragment="patient-record"
+  th:classappend="${foundedOwner != null || phone != null  } ? modal_active : ''"
+  class="container-modal-new-record"
+>
+  <div class="modal-new-record_content">
+    <span>Hasta Kayıt</span>
+    <form
+      class="form-registration-check"
+      th:if="${phone == null && foundedOwner == null}"
+      action="/owner/search"
+      method="get"
+    >
+      <input
+        type="text"
+        id="phone"
+        name="phone"
+        placeholder="Telefon numarası giriniz..."
+      />
+      <button type="submit">Sorgula</button>
+    </form>
+    <div th:if="${phone != null}" class="message-check">
+      <span th:text="${'&quot;'+phone+'&quot;'}"></span>
+      <span>*Telefon numarasına ait kayıt bulunamadı.</span>
+      <span>*Yeni kayıt oluşturmak için bilgileri giriniz.</span>
+    </div>
+    <div class="wrapper-content" th:if="${foundedOwner != null}">
+      <h2 class="owner-header">Hayvan Sahibi</h2>
+      <div class="founded-owner">
+        <h2
+          th:text="${foundedOwner.firstName} +' '+ ${foundedOwner.lastName}"
+        ></h2>
+      </div>
+      <h2 class="animal-header">Kayıtlı Hayvanları</h2>
+      <div th:replace="fragments/modal/owner-animal-fields :: select-box"></div>
+    </div>
+    <form
+      th:if="${foundedOwner != null || phone != null}"
+      action="/add"
+      method="Post"
+      class="form-animal-new-record"
+    >
+      <div
+        th:replace="fragments/modal/owner-animal-fields:: owner-fields(className=${foundedOwner == null ? '' : 'hidden'})"
+      ></div>
+      <div
+        th:replace="fragments/modal/owner-animal-fields :: animal-fields"
+      ></div>
+      <button type="submit" class="modal-from-submit">Kaydet</button>
+    </form>
+    <div class="modal-closed-button">
+      <a href=""><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+</div>

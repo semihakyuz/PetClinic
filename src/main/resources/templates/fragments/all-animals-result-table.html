@@ -1,0 +1,65 @@
+<table th:fragment="all-animals-result-table" class="result_table all-animals">
+  <th:block>
+    <table
+      th:replace="fragments/result-table-head-links:: result-table-head-links(parameter=${'pets'})"
+    ></table>
+  </th:block>
+  <thead>
+    <tr>
+      <th>Kayıt</th>
+      <th>İsim</th>
+      <th>Yaş</th>
+      <th>Tür</th>
+      <th>Cins</th>
+      <th>Sahiplik Bilgisi</th>
+      <th>İşlem</th>
+    </tr>
+  </thead>
+  <tbody th:each=" record , i : ${allAnimals}">
+    <tr>
+      <th th:text="${i.index+1}"></th>
+      <th th:text="${record.name}"></th>
+      <th th:text="${record.age}"></th>
+      <th th:text="${record.breed}"></th>
+      <th th:text="${record.type}"></th>
+      <td>
+        <a
+          th:href="@{/owner/details(id=${record.owner.ownerId}) }"
+          th:text="${record.owner.firstName} +' '+ ${record.owner.lastName}"
+          class="ownership-list-column-info"
+        ></a>
+      </td>
+      <td class="container_action_table">
+        <div class="wrapper_action-table">
+          <a
+            th:href="@{/pets/details(id=${record.animalId}) }"
+            class="process-button button-detail"
+            >İncele</a
+          >
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            th:href="@{/pets/update(id=${record.animalId}) }"
+            class="process-button button-detail"
+            >Düzenle</a
+          >
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            class="process-button button-delete all-animals"
+          >
+            Sil
+          </a>
+          <span
+            th:text="${record.animalId}"
+            class="recordId"
+            style="visibility: hidden; position: absolute"
+          ></span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+  <th:block th:if="${foundedPetMessage == null}">
+    <div
+      th:replace="fragments/pagination :: pagination(parameter=${'pets'})"
+    ></div>
+  </th:block>
+</table>

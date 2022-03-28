@@ -1,0 +1,163 @@
+<div
+  th:fragment="select-box"
+  th:if="${foundedOwner != null}"
+  class="container-animal-option"
+>
+  <div class="option-selected">
+    <h2 th:if="${not #lists.isEmpty(foundedOwner.pets)}">Mevcut Hayvanlar</h2>
+    <h2 th:if="${#lists.isEmpty(foundedOwner.pets)}">Mevcut hayvan yok</h2>
+  </div>
+  <div class="container-animal-list">
+    <div class="option_animal-search">
+      <input type="text" placeholder="Hayvan ismi..." />
+    </div>
+    <div class="option_animal-list">
+      <div th:each=" pet , i : ${foundedOwner.pets}" class="option-animal">
+        <div class="option-wrapper">
+          <label
+            for="option-value"
+            th:text="${pet.name+' '+pet.type+' '+pet.breed+' '+pet.age}"
+          >
+          </label>
+          <input
+            type="radio"
+            th:value="${pet.animalId}"
+            class="animal-option-value"
+            id="option-value"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  th:fragment="animal-fields"
+  class="wrapper-modal animal"
+  th:object="${pet}"
+>
+  <h2 class="fields-header">Hayvan Bilgisi</h2>
+  <div th:if="${patientRecordErrors !=null} " class="user-registration-error">
+    <span th:each=" msg , i : ${patientRecordErrors}">
+      <span th:text="${msg} "></span>
+    </span>
+  </div>
+  <div class="wrapper-modal_fields">
+    <div style="visibility: hidden; width: 0; height: 0; position: absolute">
+      <label for="animalId">animalId</label>
+      <input type="text" id="animalId" name="animalId" class="animalId" />
+    </div>
+    <div>
+      <label for="name">İsim*</label>
+      <input type="text" id="name" name="name" />
+    </div>
+    <div>
+      <label for="breed">Tür*</label>
+      <input type="text" id="breed" name="breed" />
+    </div>
+    <div>
+      <label for="type">Cins* </label>
+      <input type="text" id="type" name="type" />
+    </div>
+    <div>
+      <label for="age" style="margin-left: 10px">Yaş*</label>
+      <input type="text" id="age" name="age" style="margin-left: 10px" />
+    </div>
+  </div>
+  <div
+    th:if="${#httpServletRequest.requestURI  != '/pets/update'}"
+    class="container-patient-complaint"
+  >
+    <label for="explanation">Şikayet*</label>
+    <textarea
+      name="explanation"
+      class="patient-complaint_text"
+      id="explanation"
+    ></textarea>
+  </div>
+  <div th:if="${foundedOwner != null}" class="animal-clear-fields">
+    <span>Temizle</span>
+  </div>
+</div>
+
+<div
+  th:fragment="owner-fields"
+  class="wrapper-modal"
+  th:object="${owner}"
+  th:classappend="${className}"
+>
+  <h2 class="fields-header">Sahiplik Bilgisi</h2>
+  <div class="wrapper-modal_fields">
+    <div class="hidden">
+      <label for="ownerId">Ad*</label>
+      <input
+        th:if="${foundedOwner != null}"
+        type="text"
+        id="ownerId"
+        name="ownerId"
+        th:value="${foundedOwner.ownerId}"
+      />
+      <input type="text" id="ownerId" name="ownerId" />
+    </div>
+    <div>
+      <label for="firstName">Ad*</label>
+      <input
+        th:if="${foundedOwner != null}"
+        type="text"
+        id="firstName"
+        name="firstName"
+        th:value="${foundedOwner.firstName}"
+      />
+      <input type="text" id="firstName" name="firstName" />
+    </div>
+    <div style="margin-left: 3px">
+      <label for="lastName">Soyad*</label>
+      <input
+        th:if="${foundedOwner != null}"
+        type="text"
+        id="lastName"
+        name="lastName"
+        th:value="${foundedOwner.lastName}"
+      />
+      <input type="text" id="lastName" name="lastName" />
+    </div>
+    <div>
+      <label for="address">Adres* </label>
+      <textarea
+        th:if="${foundedOwner != null}"
+        type="text"
+        id="address"
+        name="address"
+        style="width: 170px !important"
+        th:value="${foundedOwner.address}"
+      ></textarea>
+      <textarea type="text" id="address" name="address"></textarea>
+    </div>
+    <div style="margin-left: 3px">
+      <label for="phoneNumber">Telefon Numarası*</label>
+      <input
+        th:if="${foundedOwner != null}"
+        type="text"
+        id="phoneNumber"
+        name="phoneNumber"
+        th:value="${foundedOwner.phoneNumber}"
+      />
+      <input
+        type="text"
+        id="phoneNumber"
+        name="phoneNumber"
+        th:value="${phone}"
+      />
+    </div>
+    <div style="margin-top: 5px">
+      <label for="email">Email*</label>
+      <input
+        th:if="${foundedOwner != null}"
+        type="text"
+        id="email"
+        name="email"
+        th:value="${foundedOwner.email}"
+      />
+      <input type="text" id="email" name="email" />
+    </div>
+  </div>
+</div>

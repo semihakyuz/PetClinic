@@ -1,0 +1,52 @@
+<div th:fragment="animal-details" class="container-details">
+  <div class="wrapper-details">
+    <h2 class="details_animal-name" th:text="${animal.name}"></h2>
+    <div class="details_animal-info">
+      <span class="animal-info_header">Tür: </span>
+      <span th:text="${animal.breed}"></span>&nbsp;&nbsp;
+      <span class="animal-info_header">Cins: </span>
+      <span th:text="${animal.type}"></span>&nbsp;&nbsp;
+      <span class="animal-info_header">Yaş: </span>
+      <span th:text="${animal.age}"></span>
+    </div>
+    <h2 class="details-result-table_header">Muayene Geçmişi</h2>
+    <span
+      th:if="${#lists.isEmpty(animal.PatientRegistration)}"
+      style="font-size: 16px; font-weight: 600; color: red; margin-bottom: 10px"
+      >Sistemde muayene kaydı mevcut değil.</span
+    >
+    <div style="max-height: 200px; overflow-y: auto">
+      <table
+        th:if="${not #lists.isEmpty(animal.PatientRegistration)}"
+        class="details-result_table"
+      >
+        <thead>
+          <tr>
+            <th>Kayıt</th>
+            <th>Giriş tarihi</th>
+            <th>Çıkış tarihi</th>
+            <th>Şikayet</th>
+            <th>Hekim Yorumu</th>
+          </tr>
+        </thead>
+        <tbody th:each=" record , i : ${animal.PatientRegistration}">
+          <tr>
+            <th th:text="${i.index+1}"></th>
+            <td th:text="${record.entryDate}"></td>
+            <td th:text="${record.releaseDate}"></td>
+            <td th:text="${record.complaint}"></td>
+            <td th:text="${record.review}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2 class="details_owner-header animal-detail">Hayvan Sahibi</h2>
+    <h2
+      class="details_owner-name"
+      th:text="${animal.owner.firstName}+' '+${animal.owner.lastName}  "
+    ></h2>
+    <div class="modal-closed-button">
+      <a><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+</div>

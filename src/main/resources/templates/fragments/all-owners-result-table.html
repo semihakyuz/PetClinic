@@ -1,0 +1,66 @@
+<table th:fragment="all-owners-result-table" class="result_table all-owners">
+  <th:block>
+    <table
+      th:replace="fragments/result-table-head-links:: result-table-head-links(parameter=${'owner'}) "
+    ></table>
+  </th:block>
+  <thead>
+    <tr>
+      <th>Kayıt</th>
+      <th>Ad</th>
+      <th>Soyad</th>
+      <th>Telefon Numarası</th>
+      <th>Email</th>
+      <th>Sahiplik</th>
+      <th>İşlem</th>
+    </tr>
+  </thead>
+  <tbody th:each=" record , i : ${allOwners}">
+    <tr>
+      <th th:text="${i.index+1}"></th>
+      <td th:text="${record.firstName}"></td>
+      <td th:text="${record.lastName}"></td>
+      <td th:text="${record.phoneNumber}"></td>
+      <td th:text="${record.email}"></td>
+      <td>
+        <a
+          th:href="@{/pets/details(id=${animal.animalId}) }"
+          class="ownership-list-column-info"
+          th:each="animal , i: ${record.getPets()}"
+          th:text="${animal.name}"
+        ></a>
+      </td>
+      <td class="container_action_table">
+        <div class="wrapper_action-table">
+          <a
+            th:href="@{/owner/details(id=${record.ownerId})}"
+            class="process-button button-detail"
+            >İncele</a
+          >
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            th:href="@{/owner/update(id=${record.ownerId}) }"
+            class="process-button button-detail"
+            >Düzenle</a
+          >
+          <a
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            class="process-button button-delete all-owners"
+          >
+            Sil
+          </a>
+          <span
+            th:text="${record.ownerId}"
+            class="recordId"
+            style="visibility: hidden; position: absolute"
+          ></span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+  <th:block th:if="${foundedOwnerMessage == null}">
+    <div
+      th:replace="fragments/pagination :: pagination(parameter=${'owner'})"
+    ></div>
+  </th:block>
+</table>

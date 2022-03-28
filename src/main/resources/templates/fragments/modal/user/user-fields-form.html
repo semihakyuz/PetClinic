@@ -1,0 +1,55 @@
+<div
+  th:fragment="user-fields-form"
+  class="container-review user-registration"
+  th:classappend="${userFieldsRegistrationErrors} != null ? modal_active: ''"
+>
+  <div
+    class="wrapper_review-content user-registration owner-update user-update"
+  >
+    <form th:action="@{/user/registration}" method="POST" th:object="${user}">
+      <div class="wrapper-modal user-registration">
+        <h2 class="fields-header owner-update">Yeni Üye Kayıt</h2>
+        <div
+          th:if="${userFieldsRegistrationErrors !=null} "
+          class="user-registration-error"
+        >
+          <span th:each=" msg , i : ${userFieldsRegistrationErrors}">
+            <span th:text="${msg} "></span>
+          </span>
+        </div>
+        <div
+          class="wrapper-modal_fields user-registration"
+          style="width: 400px"
+        >
+          <div>
+            <label for="username">*Kullanıcı Adı</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              th:value="${userRegistrationErrorUserObject !=null} ? ${userRegistrationErrorUserObject.username} : '' "
+            />
+          </div>
+          <div>
+            <label for="password">*Parola</label>
+            <input
+              type="text"
+              id="password"
+              name="password"
+              th:value="${userRegistrationErrorUserObject !=null} ? ${userRegistrationErrorUserObject.password} : '' "
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="modal-from-submit user-registration owner-update user-update"
+      >
+        Oluştur
+      </button>
+    </form>
+    <div class="modal-closed-button animal-update">
+      <a href="/user"><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+</div>

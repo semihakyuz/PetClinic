@@ -1,0 +1,52 @@
+<div
+  th:fragment="result-table-head-links"
+  class="container_result-head-section"
+>
+  <th:block>
+    <table
+      th:replace="fragments/result-table-search-box:: result-table-search-box"
+    ></table>
+  </th:block>
+  <div class="head-section_links">
+    <a
+      th:classappend="${#httpServletRequest.requestURI}  == '/' ? active-head-link"
+      href="/"
+      >Bekleyen</a
+    >
+    <a
+      th:classappend="${#request.getParameter('status')}  == 'ON' ? active-head-link "
+      href="/examination?status=ON"
+      >Muayenede</a
+    >
+    <a
+      th:classappend="${#request.getParameter('status')}  == 'COMPLETED' ? active-head-link "
+      href="/examination?status=COMPLETED"
+      >Muayenesi Tamamlanan</a
+    >
+    <a
+      th:classappend="${#request.getParameter('status')}  == 'RELEASE' ? active-head-link "
+      href="/examination?status=RELEASE"
+      >Çıkış Yapanlar</a
+    >
+    <a
+      th:classappend="${#request.getParameter('all_records')}  == '' ? active-head-link"
+      href="/examination?all_records "
+      >Tüm Muayene Geçmişi</a
+    >
+    <a
+      th:classappend="${#httpServletRequest.requestURI}  == '/pets' ? active-head-link"
+      href="/pets"
+      >Kayıtlı Tüm Hayvanlar</a
+    >
+    <a
+      th:classappend="${#httpServletRequest.requestURI}  == '/owner' ? active-head-link"
+      href="/owner "
+      >Kayıtlı Tüm Hayvan Sahipleri</a
+    >
+    <a
+      th:classappend="${#httpServletRequest.requestURI}  == '/user' ? active-head-link"
+      href="/user "
+      >Kayıtlı Kullanıcılar</a
+    >
+  </div>
+</div>

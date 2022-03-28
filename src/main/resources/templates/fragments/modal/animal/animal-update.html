@@ -1,0 +1,163 @@
+<div
+  th:fragment="animal-update"
+  class="container-review animal-update modal_active"
+>
+  <div class="wrapper_review-content animal-update">
+    <form
+      th:action="@{/pets/update/{id}(id=${animalDetail.animalId})}"
+      method="POST"
+      th:object="${pet}"
+    >
+      <div class="wrapper-modal animal">
+        <h2 class="fields-header animal-update animal-header">
+          Hayvan Bilgisi
+        </h2>
+        <div class="wrapper-modal_fields">
+          <div
+            style="visibility: hidden; width: 0; height: 0; position: absolute"
+          >
+            <label for="animalId">animalId</label>
+            <input
+              type="text"
+              id="animalId"
+              name="animalId"
+              th:value="${animalDetail.animalId}"
+              class="animalId"
+            />
+          </div>
+          <div>
+            <label for="name">İsim*</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              th:value="${animalDetail.name}"
+            />
+          </div>
+          <div>
+            <label for="breed">Tür*</label>
+            <input
+              type="text"
+              id="breed"
+              name="breed"
+              th:value="${animalDetail.breed}"
+            />
+          </div>
+          <div>
+            <label for="type">Cins* </label>
+            <input
+              type="text"
+              id="type"
+              name="type"
+              th:value="${animalDetail.type}"
+            />
+          </div>
+          <div style="margin-left: 5px">
+            <label for="age">Yaş*</label>
+            <input
+              type="text"
+              id="age"
+              name="age"
+              th:value="${animalDetail.age}"
+            />
+          </div>
+        </div>
+        <div th:if="${foundedOwner != null}" class="animal-clear-fields">
+          <span>Temizle</span>
+        </div>
+      </div>
+      <h2 class="fields-header animal-update">Sahiplik Bilgisi</h2>
+      <h2
+        th:text="${animalDetail.owner.firstName+' '+animalDetail.owner.lastName}"
+        class="fields-header owner-name animal-update"
+      ></h2>
+      <div
+        th:unless="${#lists.isEmpty(foundedOwners)}"
+        class="clear-selected-owner animal-update"
+      >
+        <span>Temizle</span>
+      </div>
+      <div
+        th:unless="${#lists.isEmpty(foundedOwners)}"
+        class="container-animal-option animal-update"
+      >
+        <div class="option-selected animal-update">
+          <h2 th:if="${foundedOwners != null}">Bulunan Hayvan Sahipleri</h2>
+        </div>
+        <div
+          th:classappend="${not #lists.isEmpty(foundedOwners)} ? active"
+          class="container-animal-list animal-update"
+        >
+          <div class="option_animal-search animal-update">
+            <input type="text" placeholder="Hayvan sahibi bilgisi..." />
+          </div>
+          <div class="option_animal-list animal-update">
+            <div
+              th:each=" owner , i : ${foundedOwners}"
+              class="option-animal animal-update"
+            >
+              <div class="option-wrapper animal-update">
+                <label
+                  for="option-value"
+                  th:text="${owner.firstName+' '+owner.lastName+' '+owner.phoneNumber}"
+                >
+                </label>
+                <input
+                  type="radio"
+                  th:value="${owner.ownerId}"
+                  class="animal-option-value animal-update"
+                  id="option-value"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input
+        type="text"
+        id="ownerId"
+        name="ownerId"
+        class="selected-owner-id"
+        style="visibility: hidden; position: absolute"
+      />
+      <button type="submit" class="modal-from-submit animal-update">
+        Kaydet
+      </button>
+    </form>
+    <div
+      th:classappend="${not #lists.isEmpty(foundedOwners)} ? option-active"
+      class="container-animal-update_search"
+    >
+      <h2 th:if="${notfound}" class="animal-update_search-label notfound">
+        *Aradığınız bilgiler ile eşleşen kayıt bulunamadı.
+      </h2>
+      <h2 class="animal-update_search-label">
+        *Hayvan sahibini değiştirmek için arama yapınız.
+      </h2>
+      <form
+        class="form-registration-check animal-update"
+        th:if="${phone == null && foundedOwner == null}"
+        action="/owner/search"
+        method="get"
+      >
+        <input
+          type="text"
+          id="ownersearchterm"
+          name="ownersearchterm"
+          placeholder="Ad,Soyad veya Telefon num..."
+        />
+        <input
+          type="text"
+          id="petId"
+          name="petId"
+          th:value="${animalDetail.animalId}"
+          style="visibility: hidden; position: absolute"
+        />
+        <button type="submit">Sorgula</button>
+      </form>
+    </div>
+    <div class="modal-closed-button animal-update">
+      <a href="/pets"><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+</div>

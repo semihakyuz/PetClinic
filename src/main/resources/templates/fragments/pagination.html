@@ -1,0 +1,30 @@
+<div th:fragment="pagination" th:style="${parameter == 'user'} ? 'bottom:-50px' "  class="container-pagination">
+  <div class="wrapper-pagination">
+    <div class="pagination-left">
+      <a
+        th:if="${currentPage != 1} "
+        th:href="@{'/'+${parameter} +'/page/' + ${currentPage - 1}}"
+        th:text="'<'"
+      ></a>
+      <span th:unless="${currentPage != 1} " th:text="'<'"></span>
+      <a th:href="@{'/'+${parameter}+'/page/' + 1}" th:text="'İlk Sayfa'"></a>
+    </div>
+    <div class="pagination-center">
+      <span th:text="${currentPage}"></span>
+      <span>/</span>
+      <span th:text="${totalPages}"></span>
+    </div>
+    <div class="pagination-right">
+      <a
+        th:href="@{'/'+${parameter}+'/page/' + ${totalPages}}"
+        th:text="'Son Sayfa'"
+      ></a>
+      <a
+        th:if="${currentPage != totalPages} "
+        th:href="@{'/'+${parameter}+'/page/' + ${currentPage + 1}}"
+        th:text="'>'"
+      ></a>
+      <span th:unless="${currentPage != totalPages} " th:text="'>'"></span>
+    </div>
+  </div>
+</div>

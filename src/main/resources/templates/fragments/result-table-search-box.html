@@ -1,0 +1,45 @@
+<div
+  th:fragment="result-table-search-box"
+  class="head-section_container-search-box"
+>
+  <form
+    th:action="${parameter} == null ? @{/#} : @{'/'+${parameter}+'/search'}"
+    method="GET"
+  >
+    <input
+      th:if="${parameter} == 'owner'"
+      type="search"
+      name="searchterm"
+      maxlength="25"
+      class="search-box_search-input"
+      placeholder="Ad veya Soyad ile arama yapınız..."
+    />
+    <input
+      th:if="${parameter} == 'pets'"
+      type="search"
+      name="searchterm"
+      maxlength="25"
+      class="search-box_search-input"
+      placeholder="Hayvan ismi ile arama yapınız..."
+    />
+    <input
+      th:if="${parameter} == 'user'"
+      type="search"
+      name="searchterm"
+      maxlength="25"
+      class="search-box_search-input"
+      placeholder="Kullanıcı ismi ile arama yapınız..."
+    />
+    <button
+      th:if="${#httpServletRequest.requestURI  != '/' && #httpServletRequest.requestURI  != '/examination' }"
+      class="search-box_search-button"
+      type="submit"
+    >
+      Ara
+    </button>
+  </form>
+  <i
+    th:if="${#httpServletRequest.requestURI  != '/' && #httpServletRequest.requestURI  != '/examination' }"
+    class="fas fa-search"
+  ></i>
+</div>

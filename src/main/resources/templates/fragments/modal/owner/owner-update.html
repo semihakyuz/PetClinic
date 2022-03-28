@@ -1,0 +1,94 @@
+<div th:fragment="owner-update" class="container-review animal-update modal_active">
+    <div class="wrapper_review-content owner-update">
+        <form th:action="@{/owner/update/{id}(id=${ownerDetail.ownerId})}" method="POST">
+            <div class="wrapper-modal owner-update ">
+                <h2 class="fields-header owner-update">Hayvan Sahibi Bilgisi</h2>
+                <div class="wrapper-modal_fields owner-update" style="width: 400px;" th:object="${user}">
+                    <div style="visibility: hidden; width: 0; height: 0;position: absolute;">
+                        <input type="text" id="ownerId" name="ownerId" th:value="${ownerDetail.ownerId}">
+                    </div>
+                    <div>
+                        <label for="firstName">Ad*</label>
+                        <input type="text" id="firstName" name="firstName" th:value="${ownerDetail.firstName}">
+                    </div>
+                    <div>
+                        <label for="lastName">Soyad*</label>
+                        <input type="text" id="lastName" name="lastName" th:value="${ownerDetail.lastName}">
+                    </div>
+                    <div>
+                        <label for="address">Adres* </label>
+                        <textarea type="text" id="address" name="address" class="update-owner text-adress-info"
+                            style="resize: none;" th:inline="text">[[${ownerDetail.address}]]</textarea>
+                    </div>
+                    <div style="margin-left: 5px;">
+                        <label for="phoneNumber">Telefon Numarası*</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" th:value="${ownerDetail.phoneNumber}">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label for="email">Email*</label>
+                        <input type="text" id="email" name="email" th:value="${ownerDetail.email}">
+                    </div>
+                </div>
+                <div th:if="${foundedOwner != null}" class="animal-clear-fields">
+                    <span>Temizle</span>
+                </div>
+            </div>
+            <h2 class="table-info owner-update">Sahiplik Bilgisi</h2>
+            <span th:if="${#lists.isEmpty(ownerDetail.getPets())}"
+                style="font-size: 16px;font-weight: 600; color: red; margin-bottom: 10px;">Hayvan sahibine ait kayıtlı
+                hayvan bulunamadı.</span>
+            <div style="max-height: 200px; overflow-y: auto;">
+                <table th:if="${not #lists.isEmpty(ownerDetail.getPets())}" class="details-result_table owner-update">
+                    <thead>
+                        <tr>
+                            <th>Kayıt</th>
+                            <th>İsim</th>
+                            <th>Yaş</th>
+                            <th>Tür</th>
+                            <th>Cins</th>
+                            <th style="text-align: center;">İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each=" animal , i : ${ownerDetail.getPets()}">
+                        <tr>
+                            <th th:text="${i.index+1}"></th>
+                            <td th:text="${animal.name}"></td>
+                            <td th:text="${animal.age}"></td>
+                            <td th:text="${animal.breed}"></td>
+                            <td th:text="${animal.type}"></td>
+                            <td class="container_action_table">
+                                <div class="wrapper_action-table">
+                                    <a class="process-button button-delete owner-update">
+                                        Sil
+                                    </a>
+                                </div>
+                            </td>
+                            <input th:value="${animal.animalId}" class="existingAnimalId"
+                                style="visibility: hidden; position: absolute;"></input>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" class="modal-from-submit owner-update">Kaydet</button>
+            <div class="container-delete-record-alert owner-update">
+                <div class="wrapper-delete-rocord-alert owner-update">
+                    <form th:action="@{/owner/update/{id}(id=${ownerDetail.ownerId})}" method="POST">
+                        <h3>Bu işlem hayvan kaydını ve tüm muayene geçmişini kalıcı olarak siler.</h3>
+                        <div class="delete-record-alert_buttons">
+                            <button type="submit" class="delete-submit">Onayla</button>
+                            <button type="button" class="delete-cancel">Vazgeç</button>
+                        </div>
+                        <input type="text" name="animalId" class="requestAnimalId"
+                            style="visibility: hidden; position: absolute;">
+                        <input type="text" name="param" class="param" style="visibility: hidden; position: absolute;"
+                            value="">
+                    </form>
+                </div>
+            </div>
+        </form>
+
+        <div class="modal-closed-button animal-update">
+            <a href="/owner"><i class="fas fa-times"></i></a>
+        </div>
+    </div>
+</div>

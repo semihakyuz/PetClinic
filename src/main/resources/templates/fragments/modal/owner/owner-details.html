@@ -1,0 +1,53 @@
+<div th:fragment="owner-details" class="container-details">
+  <div class="wrapper-details">
+    <h2 class="details_owner-header">Hayvan Sahibi</h2>
+    <h2
+      class="details_owner-name"
+      th:text="${owner.firstName}+' '+${owner.lastName}  "
+    ></h2>
+    <div class="details_animal-info">
+      <span class="animal-info_header">Telefon: </span>
+      <span th:text="${owner.phoneNumber}"></span>&nbsp;&nbsp;
+      <span class="animal-info_header">Adres: </span>
+      <span th:text="${owner.address}"></span>&nbsp;&nbsp;
+      <span class="animal-info_header">Email: </span>
+      <span th:text="${owner.email}"></span>
+    </div>
+    <h2 class="details-result-table_header">Sahiplik Bilgisi</h2>
+    <span
+        th:if="${#lists.isEmpty(ownerDetail.getPets())}"
+        style="font-size: 16px; font-weight: 600; color: red"
+        >Hayvan sahibine ait kayıtlı hayvan bulunamadı.
+      </span
+    >
+    <div style="max-height: 200px; overflow-y: auto">
+      <table
+        th:if="${not #lists.isEmpty(ownerDetail.getPets())}"
+        class="details-result_table"
+        style="width: 500px"
+      >
+        <thead>
+          <tr>
+            <th>Kayıt</th>
+            <th>İsim</th>
+            <th>Yaş</th>
+            <th>Tür</th>
+            <th>Cins</th>
+          </tr>
+        </thead>
+        <tbody th:each=" animal , i : ${owner.getPets()}">
+          <tr>
+            <th th:text="${i.index+1}"></th>
+            <td th:text="${animal.name}"></td>
+            <td th:text="${animal.age}"></td>
+            <td th:text="${animal.breed}"></td>
+            <td th:text="${animal.type}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-closed-button">
+      <a><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+</div>

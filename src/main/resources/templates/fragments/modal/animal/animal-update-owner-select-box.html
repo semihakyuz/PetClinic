@@ -1,0 +1,32 @@
+<div
+  th:fragment="animal-update-owner-select-box"
+  th:if="${foundedOwner != null}"
+  class="container-animal-option"
+>
+  <div class="option-selected">
+    <h2 th:if="${foundedOwner.pets != null}">Mevcut Hayvanlar</h2>
+    <h2 th:if="${foundedOwner.pets == null}">Mevcut hayvan yok</h2>
+  </div>
+  <div class="container-animal-list">
+    <div class="option_animal-search">
+      <input type="text" placeholder="Hayvan sahibi bilgisi..." />
+    </div>
+    <div class="option_animal-list">
+      <div th:each=" owner , i : ${foundedOwner}" class="option-animal">
+        <div class="option-wrapper">
+          <label
+            for="option-value"
+            th:text="${owner.firstName+' '+owner.lastName+' '+owner.phoneNumber+' '+owner.email}"
+          >
+          </label>
+          <input
+            type="radio"
+            th:value="${owner.ownerId}"
+            class="animal-option-value"
+            id="option-value"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
