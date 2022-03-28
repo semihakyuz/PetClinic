@@ -35,4 +35,5 @@ java -jar petclinic-1.0-SNAPSHOT.jar
   - user rolündeki kullanıcılar hasta kaydı ve muayenesi tamamlanan hayvanların çıkış işlemlerini yapabilir. Sistem içerisindeki muayene durumuna,muayene geçmişine,hayvan sahibi bilgilerine ve hayvan bilgilerine ulaşabilir.
   - Hayvan sahiplerinin ve hayvanların bilgilerinde düzenleme,silme işlemlerini sadece admin rolündeki kullanıcı yapabilir.
 - Genel Kullanım
+  - Sistem çalıştığında Kullanıcı adı : admin , parola : 123 hesap kaydı oluşturulur. Sistemden oluşturulan kayıtlar user rolünde kayıt edilir.
   - Çıkış işlemi yapılmış kayıtlar sadece aynı gün içerisindeki işlemleri gösterir. Tüm kayıtlara tablo üzerindeki ilgili linkten ulaşılabilir.
